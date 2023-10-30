@@ -2,9 +2,11 @@
 <section>
   <div class="text-center q-mt-lg text-h5">فرم {{ activeStep }}</div>
   <div class="absolute-center">
-    <form-stats-priview @setSteps="changeStep" :step="activeStep"/>
+    <div v-for="form in forms" :key="form.id">
+      <form-stats-priview  v-if="activeStep === form.id"   :form="form"  @setSteps="changeStep" :step="activeStep"/>
+    </div>
   </div>
-  {{forms}}
+
 </section>
 </template>
 
@@ -35,7 +37,7 @@ export default {
   setup(){
     const formStore = useFormStore()
     const activeStep = ref(1)
-    const forms = formStore.forms
+    const forms = formStore.$state.forms
     return{
       activeStep,
       forms

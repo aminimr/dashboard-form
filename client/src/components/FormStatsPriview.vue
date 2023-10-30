@@ -15,7 +15,7 @@
     </q-circular-progress>
   </div>
   <div class="text-subtitle1">
-    فرم اطلاعات فرد
+    {{form.title}}
   </div>
    <div style="min-width: 140px" class="flex-center">
      <div>
@@ -35,7 +35,8 @@
 export default {
   name: "FormStatsPriview",
   props:{
-    step:Number
+    step:Number,
+    form:Object
   }
 }
 </script>

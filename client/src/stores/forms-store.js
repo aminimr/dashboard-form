@@ -2,8 +2,9 @@ import { defineStore } from 'pinia';
 
 export const useFormStore = defineStore('form', {
   state: () => ({
-    forms:{
-      personalInfoForm:{
+    forms:[
+      {
+        formName:"personalInfoForm",
         id:1,
         title:"فرم اطلاعات فردی",
         formStatus:null,
@@ -14,7 +15,8 @@ export const useFormStore = defineStore('form', {
           birthDate:null,
         }
       },
-      addressForm:{
+      {
+        formName:"addressForm",
         id:2,
         title:"فرم اطلاعات آدرس",
         formStatus:null,
@@ -26,7 +28,8 @@ export const useFormStore = defineStore('form', {
           postalCode: null,
         }
       },
-      educationsForm:{
+      {
+        formName:"educationsForm",
         id:3,
         title:"فرم اطلاعات تحصیلی",
         formStatus:null,
@@ -38,7 +41,7 @@ export const useFormStore = defineStore('form', {
           to: null,
         }
       }
-    }
+    ]
   }),
   getters: {
     forms: state => state.forms !== null,
