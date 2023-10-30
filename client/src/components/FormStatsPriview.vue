@@ -19,7 +19,9 @@
   </div>
    <div style="min-width: 140px" class="flex-center">
      <div>
-       <q-btn class="full-width" color="primary" text-color="grey-1" label="نمایش فرم" />
+       <router-link :to="`/form-steps/${step}`">
+         <q-btn class="full-width" color="primary" text-color="grey-1" label="نمایش فرم" />
+       </router-link>
      </div>
      <div class="q-mt-sm flex q-gutter-x-xs">
        <q-btn @click="$emit('setSteps' , 'previousStep')"  color="green" text-color="grey-1" size="14px" label="مرحله قبل"/>
@@ -31,7 +33,10 @@
 
 <script>
 export default {
-  name: "FormStatsPriview"
+  name: "FormStatsPriview",
+  props:{
+    step:Number
+  }
 }
 </script>
 

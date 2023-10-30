@@ -12,13 +12,6 @@ const formsSchema = new Schema({
     mobile: {
         type: String,
     },
-    address: {
-        state: String,
-        city: String,
-        street: String,
-        description: String,
-        postalCode: String,
-    },
     birthDate: String,
     gender: {
         type: String,
@@ -26,6 +19,13 @@ const formsSchema = new Schema({
     },
     about: String,
     languages: [String],
+    address: {
+        state: String,
+        city: String,
+        street: String,
+        description: String,
+        postalCode: String,
+    },
     educations: [{
         caption: {
             type: String,

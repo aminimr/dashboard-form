@@ -19,10 +19,6 @@ app.use(express.static('files'))
 app.use(express.static('static'))
 app.use(express.urlencoded({extended: true}));
 
-app.get('/health', function (req, res) {
-    res.send('ok')
-})
-
 app.use('/forms', forms)
 app.use('/auth', login)
 

@@ -16,9 +16,9 @@ const loginValidationSchema = {
 }
 
 const login = async (req, res, next) => {
-    const users = fs.readFileSync(path.resolve(__dirname, '../../users.json'), 'utf-8');
-
-    res.send(JSON.parse(users))
+    const users = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../../users.json'), 'utf-8'));
+    const user = users.find(user => user.username === req.body.username)
+    res.send(user)
 }
 router.post('/login', joiValidator.validate(loginValidationSchema), login)
 
