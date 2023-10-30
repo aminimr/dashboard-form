@@ -8,9 +8,10 @@ const routes = [
     children: [
       { path: '', component: () => import('pages/IndexPage.vue') },
       { path: '/form-steps', component: () => import('pages/FormSteps.vue') },
-      { path: '/form-steps/1', component: () => import('pages/forms/AddressForm.vue') },
-      { path: '/form-steps/2', component: () => import('pages/forms/DocumentsForm.vue') },
-      { path: '/form-steps/3', component: () => import('pages/forms/PersonalInfoForm.vue') },
+      { path: '/form-steps/1', component: () => import('pages/forms/PersonalInfoForm.vue') },
+      { path: '/form-steps/2', component: () => import('pages/forms/AddressForm.vue') },
+      { path: '/form-steps/3', component: () => import('pages/forms/DocumentsForm.vue') },
+
     ]
   },
   {

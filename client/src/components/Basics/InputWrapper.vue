@@ -1,10 +1,12 @@
 <template>
-  <label>
-   {{label}}
+<div class="flex column">
+  <label class="q-mt-xs">
+    {{label}}
   </label>
   <div>
     <slot/>
   </div>
+</div>
 </template>
 
 <script>

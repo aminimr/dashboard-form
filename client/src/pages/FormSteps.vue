@@ -3,7 +3,7 @@
   <div class="text-center q-mt-lg text-h5">فرم {{ activeStep }}</div>
   <div class="absolute-center">
     <div v-for="form in forms" :key="form.id">
-      <form-stats-priview  v-if="activeStep === form.id"   :form="form"  @setSteps="changeStep" :step="activeStep"/>
+      <form-stats-priview  v-if="activeStep === form.id"   :form="form" :maxSteps="formsCount" @setSteps="changeStep" :step="activeStep"/>
     </div>
   </div>
 
@@ -29,18 +29,22 @@ export default {
               this.activeStep --;
             }
             break;
-          default:
-            this.activeStep ++;
+          case 'nextStep':
+            if(this.activeStep < this.formsCount){
+              this.activeStep ++;
+            }
         }
     }
   },
   setup(){
     const formStore = useFormStore()
     const activeStep = ref(1)
+    const formsCount = formStore.$state.forms.length
     const forms = formStore.$state.forms
     return{
       activeStep,
-      forms
+      forms,
+      formsCount
     }
   }
 }

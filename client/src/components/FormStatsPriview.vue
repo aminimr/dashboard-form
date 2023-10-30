@@ -19,24 +19,27 @@
   </div>
    <div style="min-width: 140px" class="flex-center">
      <div>
-       <router-link :to="`/form-steps/${step}`">
+       <router-link :to="`/form-steps/${form.id}`">
          <q-btn class="full-width" color="primary" text-color="grey-1" label="نمایش فرم" />
        </router-link>
      </div>
      <div class="q-mt-sm flex q-gutter-x-xs">
-       <q-btn @click="$emit('setSteps' , 'previousStep')"  color="green" text-color="grey-1" size="14px" label="مرحله قبل"/>
-       <q-btn @click="$emit('setSteps' , 'nextStep')"  color="green" text-color="grey-1" size="14px" label="مرحله بعد"/>
+       <q-btn :disable="step <= 1" @click="$emit('setSteps' , 'previousStep')"  color="green" text-color="grey-1" size="14px" label="مرحله قبل"/>
+       <q-btn :disable="step >= maxSteps"  @click="$emit('setSteps' , 'nextStep')"  color="green" text-color="grey-1" size="14px" label="مرحله بعد"/>
+<!--       <q-btn v-else @click="$emit('setSteps' , 'nextStep')"  color="green" text-color="grey-1" size="14px" label="ثبت اطلاعات"/>-->
      </div>
    </div>
 </div>
 </template>
 
 <script>
+
 export default {
   name: "FormStatsPriview",
   props:{
     step:Number,
-    form:Object
+    form:Object,
+    maxSteps:Number
   }
 }
 </script>
