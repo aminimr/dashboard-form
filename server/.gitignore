@@ -133,7 +133,6 @@ out
 .yarn/install-state.gz
 .pnp.*
 
-/static
 /static/css/
 /static/img/
 /static/js/
