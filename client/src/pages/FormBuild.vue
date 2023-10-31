@@ -119,8 +119,9 @@ const onNextClicked = async () => {
 
 const uploadMedia = async () => {
   try {
-    formStore.loading = true
     const images = [...formStore.media]
+    if (images.length === 0) return
+    formStore.loading = true
     const formData = new FormData()
 
     const notify = Notify.create({

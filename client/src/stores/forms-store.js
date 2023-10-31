@@ -65,6 +65,7 @@ export const useFormStore = defineStore('form', {
       }
       const formId = formModel._id
       delete formModel._id
+      delete formModel.__v
       return api.patch(`/forms/${formId}`, {
         ...formModel,
         draft: asDraft
