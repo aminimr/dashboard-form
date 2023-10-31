@@ -101,7 +101,22 @@ const steps = [
     component: 'DocumentsForm',
     icon: 'settings',
     doneValidator: data => {
-      return true
+      let allowDone = true
+      if (!data.education?.caption) {
+        Notify.create({
+          type: 'info',
+          message: 'رشته تحصیلی وارد نشده است.'
+        })
+        allowDone = false
+      } else
+      if (!data.education?.level) {
+        Notify.create({
+          type: 'info',
+          message: 'مقطع تحصیلی وارد نشده است.'
+        })
+        allowDone = false
+      }
+      return allowDone
     }
   }
 ]
@@ -165,11 +180,15 @@ const savedSuccessfully = async () => {
   await router.replace({name: 'forms'})
 }
 const saveAsDraft = async () => {
+  if (!steps[currentStep.value - 1].doneValidator(formStore.currentForm)) return
+
   await uploadMedia()
   await formStore.saveChanges(true)
   await savedSuccessfully()
 }
 const save = async () => {
+  if (!steps[currentStep.value - 1].doneValidator(formStore.currentForm)) return
+
   await uploadMedia()
   await formStore.saveChanges(false)
   await savedSuccessfully()

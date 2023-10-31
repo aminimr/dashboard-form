@@ -30,12 +30,12 @@ const formsSchema = new Schema({
     education: {
         caption: {
             type: String,
-            required: true
+            required: false
         },
         media: [String],
         level: {
             type: String,
-            required: true
+            required: false
         },
         from: {
             type: Number,

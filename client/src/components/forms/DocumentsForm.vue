@@ -11,10 +11,10 @@
     </template>
     <div class="flex column q-gutter-y-lg">
       <div class="row q-col-gutter-md">
-        <input-wrapper label="رشته" class="col-12 col-md-6 col-lg-3">
+        <input-wrapper label="رشته (*)" class="col-12 col-md-6 col-lg-3">
           <q-input v-model="modelValue.education.caption" filled dense/>
         </input-wrapper>
-        <input-wrapper label="مقطع" class="col-12 col-md-6 col-lg-3">
+        <input-wrapper label="مقطع (*)" class="col-12 col-md-6 col-lg-3">
           <q-input v-model="modelValue.education.level" filled dense/>
         </input-wrapper>
         <input-wrapper label="از" class="col-12 col-md-6 col-lg-3">

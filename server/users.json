@@ -10,5 +10,11 @@
     "username": "user2",
     "password": "P@ssword",
     "fullName": "کاربر شماره 2"
+  },
+  {
+    "id": 3,
+    "username": "user3",
+    "password": "P@ssword",
+    "fullName": "کاربر شماره 3"
   }
 ]
