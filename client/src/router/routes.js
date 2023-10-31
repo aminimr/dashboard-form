@@ -1,22 +1,28 @@
-import {useAuthStore} from "stores/auth-store";
-import router from "src/router/index";
-
 const routes = [
   {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/IndexPage.vue') },
-      { path: '/form-steps', component: () => import('pages/FormSteps.vue') },
-      { path: '/form-steps/1', component: () => import('pages/forms/PersonalInfoForm.vue') },
-      { path: '/form-steps/2', component: () => import('pages/forms/AddressForm.vue') },
-      { path: '/form-steps/3', component: () => import('pages/forms/DocumentsForm.vue') },
+      {name: 'dashboard', path: '', component: () => import('pages/IndexPage.vue')},
+      {name: 'forms',path: '/forms', component: () => import('pages/FormList.vue')},
+      {name: 'form_build',path: '/form/:id', component: () => import('pages/FormBuild.vue')},
 
-    ]
+      // {path: '/form-steps', component: () => import('pages/FormSteps.vue')},
+      // {path: '/form-steps/1', component: () => import('components/forms/PersonalInfoForm.vue')},
+      // {path: '/form-steps/2', component: () => import('components/forms/AddressForm.vue')},
+      // {path: '/form-steps/3', component: () => import('components/forms/DocumentsForm.vue')},
+    ].map(r=> ({...r, meta: { requiresAuth: true }}))
   },
   {
-    path:'/login',
-    component:()=>import('pages/Login.vue')
+    path: '/public',
+    component: () => import('layouts/PublicLayout.vue'),
+    children: [
+      {
+        name: 'login',
+        path: 'login',
+        component: () => import('pages/Login.vue')
+      }
+    ]
   },
   // Always leave this as last one,
   // but you can also remove it
@@ -25,12 +31,5 @@ const routes = [
     component: () => import('pages/ErrorNotFound.vue')
   }
 ]
-// router.beforeEach(async (to, from, next) => {
-//   const auth = useAuthStore()
-//
-//   if (auth.isLoggedIn) return next()
-//
-//   return next({path: 'login'})
-// })
 
 export default routes

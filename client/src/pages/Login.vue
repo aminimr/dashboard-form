@@ -1,58 +1,52 @@
 <template>
-  <section dir="rtl">
-    <q-form class="absolute-center q-gutter-y-md login" @submit="onSubmit">
-      <div class="full-width">
-        <input-wrapper label="نام کاربری">
-          <q-input v-model="payload.username" dense/>
-        </input-wrapper>
+  <q-page padding class="column justify-center">
+    <div class="row justify-center">
+      <div class="col-12 col-md-auto" style="width: 400px;">
+        <q-card class="shadow-7">
+          <q-card-section>
+            <q-form class="q-gutter-y-md" @submit="onSubmit">
+              <div class="text-body1 q-mb-sm">ورود به سیستم</div>
+              <div class="full-width">
+                <input-wrapper label="نام کاربری">
+                  <q-input v-model="payload.username" dense/>
+                </input-wrapper>
+              </div>
+              <div class="full-width">
+                <input-wrapper label="رمز عبور">
+                  <q-input v-model="payload.password" dense type="password"/>
+                </input-wrapper>
+              </div>
+              <div class="full-width">
+                <q-btn class="full-width" color="green" type="submit"> ورود</q-btn>
+              </div>
+            </q-form>
+          </q-card-section>
+        </q-card>
       </div>
-      <div class="full-width">
-        <input-wrapper label="رمز عبور">
-          <q-input v-model="payload.password" dense type="password"/>
-        </input-wrapper>
-      </div>
-          <div class="full-width">
-            <q-btn class="full-width" color="green"  type="submit"> ورود</q-btn>
-          </div>
-    </q-form>
-  </section>
+    </div>
+  </q-page>
 </template>
 
-<script>
-import InputWrapper from "components/Basics/InputWrapper.vue";
-import {reactive} from "vue";
+<script setup>
+import InputWrapper from "components/basics/InputWrapper.vue";
+import {ref} from "vue";
 import {useAuthStore} from "stores/auth-store";
-export default {
-  name: "Login",
-  components:{
-    InputWrapper
-  },
-  methods:{
-    onSubmit(){
-      const authStore = useAuthStore()
-      authStore.login(this.payload)
-    }
-  },
-  setup(){
-    const payload = reactive({
-      username:"user1",
-      password:"P@ssword"
-    })
-    return{
-      payload
-    }
+import {useRouter, useRoute} from 'vue-router'
+
+const router = useRouter()
+const route = useRoute()
+const payload = ref({
+  username: "user1",
+  password: "P@ssword"
+})
+
+const onSubmit = async () => {
+  const authStore = useAuthStore()
+  const success = await authStore.login(payload.value)
+  console.log('success', success)
+  if (success && authStore.isLoggedIn) {
+    const redirectTo = route.query.redirect ?? '/forms'
+    await router.replace(redirectTo)
   }
 }
 </script>
-
-<style scoped>
-.login{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-width: 250px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  padding: 15px 20px;
-}
-</style>

@@ -1,5 +1,5 @@
 <template>
-<div dir="rtl" class="forms-stats-preview  flex column items-center justify-between">
+<div class="forms-stats-preview  flex column items-center justify-between">
   <div>
     <q-circular-progress
       show-value

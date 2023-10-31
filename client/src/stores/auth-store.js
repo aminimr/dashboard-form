@@ -1,23 +1,40 @@
-import { defineStore } from 'pinia';
+import {defineStore} from 'pinia';
 import {api} from 'boot/axios'
+import {useFormStore} from "stores/forms-store";
+
 export const useAuthStore = defineStore('auth', {
   state: () => ({
-    id:null,
-    username:"",
-    password:"",
-    fullname:"",
+    userId: null
   }),
   getters: {
-    isLoggedIn : state => state.id !== null
+    isLoggedIn: state => !!state.userId
   },
   actions: {
-   async login(payload) {
-     api.post('auth/login',payload).then(({data})=>{
-       this.username = data.username
-       this.password = data.password
-       this.id = data.id
-       this.fullName = data.fullName
-     })
+    async clearSession() {
+      const formStore = useFormStore()
+      formStore.forms = []
+      formStore.currentForm = null
+      formStore.media = []
+      this.userId = null
     },
+    async login(payload) {
+      try {
+        const {data} = await api.post('auth/login', payload)
+        const {success, data: userId} = data
+        if (success) {
+          await this.clearSession()
+          this.userId = userId
+        }
+        return success
+      } catch (ex) {
+        // this.error = ex.message
+        console.log(ex.message)
+        return false
+      }
+    },
+  },
+  persist: {
+    storage: sessionStorage,
+    key: 'auth'
   },
 });

@@ -13,7 +13,7 @@
 <script>
 import FormStatsPriview from "components/FormStatsPriview.vue";
 import {ref} from "vue";
-import InputWrapper from "components/Basics/InputWrapper.vue";
+import InputWrapper from "components/basics/InputWrapper.vue";
 import {useFormStore} from "stores/forms-store";
 export default {
   name: "FormSteps",

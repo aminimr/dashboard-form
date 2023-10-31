@@ -18,7 +18,8 @@ const formsSchema = new Schema({
         enum: ['male', 'female']
     },
     about: String,
-    languages: [String],
+    avatar: String,
+    languages: String,
     address: {
         state: String,
         city: String,
@@ -26,7 +27,7 @@ const formsSchema = new Schema({
         description: String,
         postalCode: String,
     },
-    educations: [{
+    education: {
         caption: {
             type: String,
             required: true
@@ -44,10 +45,10 @@ const formsSchema = new Schema({
             type: Number,
             required: false
         }
-    }],
+    },
     draft: {
         type: Boolean,
-        default: false
+        default: true
     },
     userId: {
         type: Number,

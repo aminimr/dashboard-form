@@ -12,6 +12,7 @@ module.exports = () => {
                 .valid("production", "development", "test")
                 .default('development'),
             PORT: joi.number().default(3001),
+            CREATE_FORM_IF_NOT_EXIST: joi.boolean().default(true),
             MONGO_DB_HOST: joi.string().required(),
             MONGO_DB_NAME: joi.string().required(),
             MONGO_DB_USERNAME: joi.string().allow('', null),
@@ -30,6 +31,7 @@ module.exports = () => {
     const envObject = {
         port: envVars.PORT,
         env: envVars.NODE_ENV,
+        createFormIfNotExist: envVars.CREATE_FORM_IF_NOT_EXIST,
         mongo: {
             host: envVars.MONGO_DB_HOST,
             name: envVars.MONGO_DB_NAME,
